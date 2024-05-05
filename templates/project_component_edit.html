@@ -1,0 +1,8 @@
+<a  hx-target=".project" hx-swap="closest" href="/edit_project/{{ project_id }}">edit project</a>
+   <iframe src="{{ link }}" frameborder="0"></iframe>
+    <div class="cover">
+        <h1>{{name}}</h1>
+        <p>{{description}}</p>
+        <button class="close" onclick="this.parentNode.style.display = 'none'">X</button>
+    </div>
+    <button onclick="window.open('{{ link }}')">Open in new tab</button>

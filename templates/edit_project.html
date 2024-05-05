@@ -1,0 +1,14 @@
+
+<form action="/edit_project/{{project_id}}" method="post" hx-target=".project" hx-swap="close">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required value="{{name}}"><br>
+    
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50" required >{{description}}</textarea><br>
+    
+    <label for="link">Link:</label><br>
+    <input type="text" id="link" name="link" required value="{{link}}"><br><br>
+    
+    <input type="submit" value="Submit">
+
+</form>  

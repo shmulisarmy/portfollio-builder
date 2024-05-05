@@ -1,0 +1,17 @@
+<form action='/comment/{{project_id}}' method="post"  hx-prepend="comments">
+    <label for="name">name</label>
+    <label for="name">content</label>
+    <input type="text" name="name">
+    <br>
+    <input type="text" name="content">
+    <br>
+    <input type="submit">
+</form>
+<div class="comments">
+{% for comment in comments %}
+    <div class="comment">
+        <h3>{{comment[0]}}</h3>
+        <p>{{comment[1]}}</p>
+    </div>
+    {% endfor %}
+</div>

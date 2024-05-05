@@ -1,0 +1,53 @@
+<style>
+    .project {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        background-color: rgb(255, 255, 255);
+    }
+    .comments {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 10px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .comment {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        background-color: black;
+        color: white;
+    }
+</style>
+
+
+<div class="project">
+    <iframe src="{{ project[0] }}" frameborder="0"></iframe>
+    <div class="cover">
+        <h1>{{project[1]}}</h1>
+        <p>{{project[2]}}</p>
+        <button class="close" onclick="this.parentNode.style.display = 'none'">X</button>
+    </div>
+    <button onclick="window.open('{{ link }}')">Open in new tab</button>
+
+    <div class="comments">
+        {% for comment in comments %}
+        <div class="comment">
+            <h3>{{comment[0]}}</h3>
+            <p>{{comment[1]}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>

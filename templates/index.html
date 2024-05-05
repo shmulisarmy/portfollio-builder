@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0%;
+            padding: 0%;
+            background: linear-gradient(90deg, lightblue, lightgreen);
+        }
+
+
+        header {
+            position: relative;
+            padding: 0%;
+            text-align: center;
+            /* background: linear-gradient(90deg, rgba(64, 63, 63, 0.39), rgba(255, 0, 0, 0.457)); */
+
+        }
+
+        header {
+            height: calc(30vh + 300px);
+        }
+
+        header .image {
+            width: 100%;
+            height: 100%;
+        }
+
+        header .text {
+            color: white;
+            background-color: rgba(138, 69, 11, 0.515);
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        nav {
+            margin-top: 0%;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            position: sticky;
+            top: 0%;
+            z-index: 1;
+        }
+
+        main {
+            margin: 8%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-gap: 50px;
+        }
+
+
+        .project {
+            background: linear-gradient(90deg, purple, red);
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            animation: appear 2s forwards;
+            opacity: 0;
+            overflow-x: hidden;
+        }
+
+        .project iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .project button {
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .project .image img {
+            width: 100%;
+            height: 100%;
+            transform: scale(.9);
+        }
+
+        .project button:active {
+            transform: scale(.92);
+        }
+
+        .project button:hover {
+            background: purple;
+        }
+
+        .project .cover {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(80, 75, 75, 0.945);
+            width: 100%;
+            height: 100%;
+            transform: translate(-100%, 0);
+            opacity: 0;
+            color: rgb(199, 188, 188);
+
+
+
+        }
+
+        .project .cover h1 {
+            text-shadow: 3px 3px 3px;
+        }
+
+        .project:hover .cover {
+            animation: slide_in 2s forwards;
+
+        }
+
+        .project .close {
+            position: absolute;
+            top: 1%;
+            left: 1%;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 100%;
+        }
+
+
+        @keyframes slide_in {
+
+            100% {
+                transform: translate(0%, 0);
+                opacity: 1;
+
+            }
+        }
+
+
+
+        @keyframes appear {
+            0% {
+                opacity: .7;
+                scale: .7;
+            }
+
+            100% {
+                opacity: 1;
+                scale: 1;
+            }
+        }
+    .comments {
+                margin: 8%;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-gap: 20px;
+            }
+    .comment {
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+        background-color: white;
+        
+        color: rgb(0, 0, 0);
+    }
+    </style>
+
+</head>
+
+<body hx-boost="true">
+
+    <header>
+        <div class="image">
+            <img src="https://picsum.photos/id/237/200" alt="">
+        </div>
+        <div class="text">
+            <h1>{{username}}</h1>
+            <h1>Portfolio</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias fugit officiis dolore itaque ducimus quasi
+                nam fugiat repellendus, vero quis ut tempore esse delectus totam repellat pariatur debitis accusamus
+                cupiditate.</p>
+        </div>
+    </header>
+
+    <nav>
+        <p>home</p>
+        <p>home</p>
+        <p>home</p>
+    </nav>
+
+    <main>
+        {% for project in projects %}
+        <div class="project">
+            <iframe src="{{ project[0] }}" frameborder="0"></iframe>
+            <div class="cover">
+                <h1>{{project[1]}}</h1>
+                <p>{{project[2]}}</p>
+                <button hx-get="/comments/{{project[3]}}" hx-swap="outerHTML">show comments</button>
+                <button class="close" onclick="this.parentNode.style.display = 'none'">X</button>
+            </div>
+            <button onclick="window.open('{{ project[0] }}')">Open in new tab</button>
+        </div>
+        {% endfor %}
+    </main>
+
+</body>
+
+</html>
